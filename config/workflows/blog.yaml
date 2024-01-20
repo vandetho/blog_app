@@ -1,0 +1,49 @@
+framework:
+    workflows:
+        blog:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type:     'method'
+                property: 'state'
+            supports:
+                - App\Entity\Blog
+            initial_marking: !php/const App\Workflow\State\BlogState::NEW_BLOG
+            places:
+                !php/const App\Workflow\State\BlogState::NEW_BLOG:
+                !php/const App\Workflow\State\BlogState::NEED_REVIEW:
+                    metadata:
+                        bg_color: DeepSkyBlue
+                !php/const App\Workflow\State\BlogState::NEED_UPDATE:
+                    metadata:
+                        bg_color: Orchid
+                !php/const App\Workflow\State\BlogState::PUBLISHED:
+                    metadata:
+                        bg_color: Lime
+            transitions:
+                !php/const App\Workflow\Transition\BlogTransition::CREATE_BLOG:
+                    from:
+                        - !php/const App\Workflow\State\BlogState::NEW_BLOG
+                    to:
+                        - !php/const App\Workflow\State\BlogState::NEED_REVIEW
+                !php/const App\Workflow\Transition\BlogTransition::PUBLISH:
+                    from:
+                        - !php/const App\Workflow\State\BlogState::NEED_REVIEW
+                    to:
+                        - !php/const App\Workflow\State\BlogState::PUBLISHED
+                !php/const App\Workflow\Transition\BlogTransition::NEED_REVIEW:
+                    from:
+                        - !php/const App\Workflow\State\BlogState::PUBLISHED
+                    to:
+                        - !php/const App\Workflow\State\BlogState::NEED_REVIEW
+                !php/const App\Workflow\Transition\BlogTransition::REJECT:
+                    from:
+                        - !php/const App\Workflow\State\BlogState::NEED_REVIEW
+                    to:
+                        - !php/const App\Workflow\State\BlogState::NEED_UPDATE
+                !php/const App\Workflow\Transition\BlogTransition::UPDATE:
+                    from:
+                        - !php/const App\Workflow\State\BlogState::NEED_UPDATE
+                    to:
+                        - !php/const App\Workflow\State\BlogState::NEED_REVIEW
