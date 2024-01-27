@@ -68,11 +68,12 @@
         }
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
+        "fakerphp/faker": "^1.23",
         "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
-        "symfony/phpunit-bridge": "^7.0",
-        "symfony/maker-bundle": "^1.52.0"
+        "symfony/maker-bundle": "^1.52.0",
+        "symfony/phpunit-bridge": "^7.0"
     }
 }

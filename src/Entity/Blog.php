@@ -30,14 +30,8 @@ class Blog
     /**
      * @var string|null
      */
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
-    private ?string $titleCanonical = null;
-
-    /**
-     * @var string|null
-     */
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $caption = null;
+    private ?string $content = null;
 
     /**
      * @var string|null
@@ -61,25 +55,14 @@ class Blog
         return $this;
     }
 
-    public function getTitleCanonical(): ?string
+    public function getContent(): ?string
     {
-        return $this->titleCanonical;
+        return $this->content;
     }
 
-    public function setTitleCanonical(?string $titleCanonical): Blog
+    public function setContent(?string $content): Blog
     {
-        $this->titleCanonical = $titleCanonical;
-        return $this;
-    }
-
-    public function getCaption(): ?string
-    {
-        return $this->caption;
-    }
-
-    public function setCaption(?string $caption): Blog
-    {
-        $this->caption = $caption;
+        $this->content = $content;
         return $this;
     }
 
