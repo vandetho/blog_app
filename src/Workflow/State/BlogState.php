@@ -12,6 +12,7 @@ namespace App\Workflow\State;
 final class BlogState
 {
     public const NEW_BLOG = 'new_blog';
+    public const CHECKING_CONTENT = 'checking_content';
     public const NEED_REVIEW = 'need_review';
     public const NEED_UPDATE = 'need_update';
     public const PUBLISHED = 'published';

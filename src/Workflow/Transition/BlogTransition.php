@@ -14,6 +14,8 @@ final class BlogTransition
     public const CREATE_BLOG = 'create_blog';
     public const UPDATE = 'update';
     public const PUBLISH = 'publish';
+    public const VALID = 'valid';
+    public const INVALID = 'invalid';
     public const REJECT = 'reject';
     public const NEED_REVIEW = 'need_review';
 }
