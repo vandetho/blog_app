@@ -68,9 +68,9 @@ readonly class BlogEventWorkflow
      * @param int $blogId
      * @param string|null $title
      * @param string|null $content
-     * @return Blog
+     * @return Blog|string
      */
-    public function update(int $blogId, ?string $title, ?string $content): Blog
+    public function update(int $blogId, ?string $title, ?string $content): Blog|string
     {
         $blog = $this->getBlog($blogId);
         if ($title) {
@@ -79,9 +79,12 @@ readonly class BlogEventWorkflow
         if ($content) {
             $blog->setContent($content);
         }
-        $this->blogEventStateMachine->apply($blog, BlogTransition::UPDATE);
-        $this->blogRepository->save($blog);
-        return $blog;
+        if ($this->blogEventStateMachine->can($blog, BlogTransition::UPDATE)) {
+            $this->blogEventStateMachine->apply($blog, BlogTransition::UPDATE);
+            $this->blogRepository->save($blog);
+            return $blog;
+        }
+        return 'This blog content must have more than 200 characters';
     }
 
     /**

@@ -2,7 +2,7 @@ framework:
     workflows:
         blog_event:
             type: 'state_machine'
-            events_to_dispatch: ['workflow.enter']
+            events_to_dispatch: ['workflow.entered']
             audit_trail:
                 enabled: true
             marking_store:

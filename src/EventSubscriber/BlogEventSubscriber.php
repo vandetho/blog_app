@@ -31,7 +31,8 @@ readonly class BlogEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'workflow.blog_event.enter.checking_content' => 'onCheckingContent',
+            // Execute when our subject entered the state checking_content
+            'workflow.blog_event.entered.checking_content' => 'onCheckingContent',
             // In here, we will prevent the update transition under certain condition
             'workflow.blog_event.guard.update' => 'onGuardUpdate',
         ];

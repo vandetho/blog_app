@@ -41,7 +41,7 @@ class BlogEventWorkflowTest extends KernelTestCase
     {
         $faker = Factory::create();
         $title = $faker->sentence();
-        $content = $faker->paragraph();
+        $content = $faker->paragraph(1);
         $blog = $this->blogEventWorkflow->create($title, $content);
 
         $this->assertNotNull($blog->getId());
@@ -67,16 +67,14 @@ class BlogEventWorkflowTest extends KernelTestCase
     {
         $faker = Factory::create();
         $title = $faker->sentence();
-        $content = $faker->paragraph();
+        $content = $faker->paragraph(1);
 
         $blog = $this->blogEventWorkflow->update($blogId, $title, $content);
-        $this->assertSame($title, $blog->getTitle());
-        $this->assertSame($content, $blog->getContent());
-        $this->assertSame(BlogState::NEED_UPDATE, $blog->getState());
+        $this->assertSame($blog, 'This blog content must have more than 200 characters');
     }
 
     /**
-     * @depends testGuardUpdate
+     * @depends testCreateValidBlog
      */
     public function testUpdate(int $blogId): void
     {
