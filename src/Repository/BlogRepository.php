@@ -5,6 +5,7 @@ namespace App\Repository;
 
 use App\Entity\Blog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,14 +22,45 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BlogRepository extends ServiceEntityRepository
 {
+
     /**
      * BlogRepository constructor.
      *
      * @param ManagerRegistry $registry
+     * @param string          $dtoClass
      */
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly string $dtoClass = \App\DTO\Blog::class
+    ){
         parent::__construct($registry, Blog::class);
+    }
+
+    /**
+     * @return array|\App\DTO\Blog[]
+     */
+    public function findAsDTO(): array
+    {
+        return $this->createQueryBuilder('b')
+            ->select(['b.id', 'b.title', 'b.content'])
+            ->getQuery()
+            ->getResult($this->dtoClass);
+    }
+
+    /**
+     * @param int $id
+     * @return \App\DTO\Blog|null
+     *
+     * @throws NonUniqueResultException
+     */
+    public function findByIdAsDTO(int $id): ?\App\DTO\Blog
+    {
+        return $this->createQueryBuilder('b')
+            ->select(['b.id', 'b.title', 'b.content'])
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult($this->dtoClass);
     }
 
     /**
