@@ -8,7 +8,7 @@ namespace App\DTO;
  * @package App\DTO
  * @author  Vandeth THO <thovandeth@gmail.com>
  */
-class Blog
+class Article
 {
 
     /**
@@ -27,7 +27,7 @@ class Blog
     public ?string $content = null;
 
     /**
-     * @var string|null
+     * @var array|null
      */
-    public ?string $state = null;
+    public ?array $marking = null;
 }

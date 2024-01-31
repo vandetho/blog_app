@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace App\Hydrator;
 
-use App\DTO\Blog;
+use App\DTO\Article;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class BlogHydrator
+ * Class ArticleHydrator
  * @package App\Hydrator
  * @author  Vandeth THO <thovandeth@gmail.com>
  */
-class BlogHydrator extends AbstractHydrator
+class ArticleHydrator extends AbstractHydrator
 {
     /**
-     * BlogHydrator constructor.
+     * ArticleHydrator constructor.
      *
      * @param EntityManagerInterface $em
      * @param string $dtoClass
      */
-    public function __construct(EntityManagerInterface $em, string $dtoClass = Blog::class)
+    public function __construct(EntityManagerInterface $em, string $dtoClass = Article::class)
     {
         parent::__construct($em, $dtoClass);
     }

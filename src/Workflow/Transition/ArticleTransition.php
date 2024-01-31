@@ -4,20 +4,14 @@ declare(strict_types=1);
 namespace App\Workflow\Transition;
 
 /**
- * Class BlogTransition
- *
+ * Class ArticleTransition
  * @package App\Workflow\Transition
  * @author Vandeth THO <thovandeth@gmail.com>
  */
-final class BlogTransition
+final class ArticleTransition
 {
-    public const CREATE_BLOG = 'create_blog';
-    public const UPDATE = 'update';
+    public const CREATE_ARTICLE = 'create_article';
     public const PUBLISH = 'publish';
-    public const VALID = 'valid';
-    public const INVALID = 'invalid';
-    public const REJECT = 'reject';
-    public const NEED_REVIEW = 'need_review';
     public const APPROVE_CONTENT = 'approve_content';
     public const APPROVE_SPELLING = 'approve_spelling';
 }

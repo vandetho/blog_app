@@ -3,70 +3,70 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Blog;
+use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class BlogRepository
+ * Class ArticleRepository
  * @package App\Repository
  * @author Vandeth THO <thovandeth@gmail.com>
  *
- * @extends ServiceEntityRepository<Blog>
+ * @extends ServiceEntityRepository<Article>
  *
- * @method Blog|null find($id, $lockMode = null, $lockVersion = null)
- * @method Blog|null findOneBy(array $criteria, array $orderBy = null)
- * @method Blog[]    findAll()
- * @method Blog[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Article|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Article|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Article[]    findAll()
+ * @method Article[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BlogRepository extends ServiceEntityRepository
+class ArticleRepository extends ServiceEntityRepository
 {
 
     /**
-     * BlogRepository constructor.
+     * ArticleRepository constructor.
      *
      * @param ManagerRegistry $registry
      * @param string          $dtoClass
      */
     public function __construct(
         ManagerRegistry $registry,
-        private readonly string $dtoClass = \App\DTO\Blog::class
+        private readonly string $dtoClass = \App\DTO\Article::class
     ){
-        parent::__construct($registry, Blog::class);
+        parent::__construct($registry, Article::class);
     }
 
     /**
-     * @return array|\App\DTO\Blog[]
+     * @return array|\App\DTO\Article[]
      */
     public function findAsDTO(): array
     {
-        return $this->createQueryBuilder('b')
-            ->select(['b.id', 'b.title', 'b.content', 'b.state'])
+        return $this->createQueryBuilder('a')
+            ->select(['a.id', 'a.title', 'a.content', 'a.marking'])
             ->getQuery()
             ->getResult($this->dtoClass);
     }
 
     /**
      * @param int $id
-     * @return \App\DTO\Blog|null
+     * @return \App\DTO\Article|null
      *
      * @throws NonUniqueResultException
      */
-    public function findByIdAsDTO(int $id): ?\App\DTO\Blog
+    public function findByIdAsDTO(int $id): ?\App\DTO\Article
     {
-        return $this->createQueryBuilder('b')
-            ->select(['b.id', 'b.title', 'b.content', 'b.state'])
-            ->where('b.id = :id')
+        return $this->createQueryBuilder('a')
+            ->select(['a.id', 'a.title', 'a.content', 'a.marking'])
+            ->where('a.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult($this->dtoClass);
     }
 
     /**
-     * @return Blog
+     * @return Article
      */
-    public function create(): Blog
+    public function create(): Article
     {
         return new $this->_entityName;
     }
@@ -74,10 +74,10 @@ class BlogRepository extends ServiceEntityRepository
     /**
      * Save an object in the database
      *
-     * @param Blog $blog
+     * @param Article $blog
      * @param bool $andFlush tell the manager whether the object needs to be flush or not
      */
-    public function save(Blog $blog, bool $andFlush = true): void
+    public function save(Article $blog, bool $andFlush = true): void
     {
         $this->persist($blog);
         if ($andFlush) {
@@ -86,28 +86,28 @@ class BlogRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Blog $blog
+     * @param Article $blog
      *
      * @return void
      */
-    public function persist(Blog $blog): void
+    public function persist(Article $blog): void
     {
         $this->getEntityManager()->persist($blog);
     }
 
     /**
-     * @param Blog $blog
+     * @param Article $blog
      * @return void
      */
-    public function remove(Blog $blog): void
+    public function remove(Article $blog): void
     {
         $this->getEntityManager()->remove($blog);
     }
 
     /**
-     * @param Blog $blog
+     * @param Article $blog
      */
-    public function reload(Blog $blog): void
+    public function reload(Article $blog): void
     {
         $this->getEntityManager()->refresh($blog);
     }

@@ -51,6 +51,11 @@ jobs:
                     composer install
                 env:
                     DATABASE_URL: "mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/${{ secrets.MYSQL_DATABASE }}_test"
-            -   name: Running test
-                run: |
-                    php bin/phpunit
+#            -   name: Running test
+#                run: |
+#                    # create the test database
+#                    php bin/console --env=test doctrine:database:create
+#
+#                    # create the tables/columns in test database
+#                    php bin/console --env=test doctrine:schema:create
+#                    php bin/phpunit

@@ -1,0 +1,52 @@
+framework:
+    workflows:
+        article_workflow:
+            type: 'workflow'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type:     'method'
+                property: 'marking'
+            supports:
+                - App\Entity\Article
+            initial_marking: !php/const App\Workflow\State\ArticleState::NEW_ARTICLE
+            places:
+                !php/const App\Workflow\State\ArticleState::NEW_ARTICLE:
+                !php/const App\Workflow\State\ArticleState::CHECKING_CONTENT:
+                    metadata:
+                        bg_color: ORANGE
+                !php/const App\Workflow\State\ArticleState::CONTENT_APPROVED:
+                    metadata:
+                        bg_color: DeepSkyBlue
+                !php/const App\Workflow\State\ArticleState::CHECKING_SPELLING:
+                    metadata:
+                        bg_color: ORANGE
+                !php/const App\Workflow\State\ArticleState::SPELLING_APPROVED:
+                    metadata:
+                        bg_color: DeepSkyBlue
+                !php/const App\Workflow\State\ArticleState::PUBLISHED:
+                    metadata:
+                        bg_color: Lime
+            transitions:
+                !php/const App\Workflow\Transition\ArticleTransition::CREATE_ARTICLE:
+                    from:
+                        - !php/const App\Workflow\State\ArticleState::NEW_ARTICLE
+                    to:
+                        - !php/const App\Workflow\State\ArticleState::CHECKING_CONTENT
+                        - !php/const App\Workflow\State\ArticleState::CHECKING_SPELLING
+                !php/const App\Workflow\Transition\ArticleTransition::APPROVE_SPELLING:
+                    from:
+                        - !php/const App\Workflow\State\ArticleState::CHECKING_SPELLING
+                    to:
+                        - !php/const App\Workflow\State\ArticleState::SPELLING_APPROVED
+                !php/const App\Workflow\Transition\ArticleTransition::APPROVE_CONTENT:
+                    from:
+                        - !php/const App\Workflow\State\ArticleState::CHECKING_CONTENT
+                    to:
+                        - !php/const App\Workflow\State\ArticleState::CONTENT_APPROVED
+                !php/const App\Workflow\Transition\ArticleTransition::PUBLISH:
+                    from:
+                        - !php/const App\Workflow\State\ArticleState::CONTENT_APPROVED
+                        - !php/const App\Workflow\State\ArticleState::SPELLING_APPROVED
+                    to:
+                        - !php/const App\Workflow\State\ArticleState::PUBLISHED
