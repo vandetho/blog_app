@@ -49,4 +49,7 @@ jobs:
                 run: |
                     composer install
                 env:
-                    DATABASE_URL: "mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/${{ secrets.MYSQL_DATABASE }}"
+                    DATABASE_URL: "mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/${{ secrets.MYSQL_DATABASE }}_test"
+            -   name: Running test
+                run: |
+                    php bin/phpunit
