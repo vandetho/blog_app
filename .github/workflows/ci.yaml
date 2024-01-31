@@ -11,6 +11,7 @@ jobs:
                 image: mysql:latest
                 env:
                     MYSQL_ALLOW_EMPTY_PASSWORD: false
+                    MYSQL_USER: ${{ secrets.MYSQL_USER }}
                     MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
                     MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}_test
                 ports:
