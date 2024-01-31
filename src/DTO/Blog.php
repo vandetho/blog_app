@@ -10,6 +10,12 @@ namespace App\DTO;
  */
 class Blog
 {
+
+    /**
+     * @var int|null
+     */
+    public ?int $id = null;
+
     /**
      * @var string|null
      */

@@ -5,6 +5,7 @@ namespace App\Tests\Repository;
 
 use App\DTO\Blog;
 use App\Repository\BlogRepository;
+use App\Workflow\State\BlogState;
 use Doctrine\ORM\NonUniqueResultException;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -29,9 +30,12 @@ class BlogRepositoryTest extends KernelTestCase
         $blog = $this->blogRepository->create();
         $blog->setTitle($title);
         $blog->setContent($content);
+        $blog->setState(BlogState::NEW_BLOG);
         $this->blogRepository->save($blog);
 
         $dto = $this->blogRepository->findByIdAsDTO($blog->getId());
+        $this->assertNotNull($dto);
         $this->assertSame(get_class($dto), Blog::class);
+        return $dto->id;
     }
 }
