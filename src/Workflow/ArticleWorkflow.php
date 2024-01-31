@@ -48,43 +48,29 @@ readonly class ArticleWorkflow
     }
 
     /**
-     * Reject the article and send it to be updated
-     *
      * @param int $articleId
      * @return Article
      */
-    public function reject(int $articleId): Article
+    public function approveContent(int $articleId): Article
     {
         $article = $this->getArticle($articleId);
-        $this->articleWorkflow->apply($article, ArticleTransition::REJECT);
+        $this->articleWorkflow->apply($article, ArticleTransition::APPROVE_CONTENT);
         $this->articleRepository->save($article);
         return $article;
 
     }
 
     /**
-     * Update the article and send it to be reviewed
-     *
      * @param int $articleId
-     * @param string|null $title
-     * @param string|null $content
-     * @return Article|string
+     * @return Article
      */
-    public function update(int $articleId, ?string $title, ?string $content): Article|string
+    public function approveSpelling(int $articleId): Article
     {
         $article = $this->getArticle($articleId);
-        if ($title) {
-            $article->setTitle($title);
-        }
-        if ($content) {
-            $article->setContent($content);
-        }
-        if ($this->articleWorkflow->can($article, ArticleTransition::UPDATE)) {
-            $this->articleWorkflow->apply($article, ArticleTransition::UPDATE);
-            $this->articleRepository->save($article);
-            return $article;
-        }
-        return 'This article content must have more than 200 characters';
+        $this->articleWorkflow->apply($article, ArticleTransition::APPROVE_SPELLING);
+        $this->articleRepository->save($article);
+        return $article;
+
     }
 
     /**
@@ -97,20 +83,6 @@ readonly class ArticleWorkflow
     {
         $article = $this->getArticle($articleId);
         $this->articleWorkflow->apply($article, ArticleTransition::PUBLISH);
-        $this->articleRepository->save($article);
-        return $article;
-    }
-
-    /**
-     * Reject the article and send it to be updated
-     *
-     * @param int $articleId
-     * @return Article
-     */
-    public function needReview(int $articleId): Article
-    {
-        $article = $this->getArticle($articleId);
-        $this->articleWorkflow->apply($article, ArticleTransition::NEED_REVIEW);
         $this->articleRepository->save($article);
         return $article;
     }

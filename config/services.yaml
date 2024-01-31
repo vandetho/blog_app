@@ -26,3 +26,5 @@ services:
         public: true
     App\Workflow\BlogEventWorkflow:
         public: true
+    App\Workflow\ArticleWorkflow:
+        public: true
