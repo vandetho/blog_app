@@ -22,7 +22,9 @@ doctrine:
                 prefix:    'App\Entity'
                 alias:     App
         hydrators:
-            App\DTO\Blog: App\Hydrator\BlogHydrator
+            App\DTO\Article: App\Hydrator\ArticleHydrator
+            App\DTO\Blog:    App\Hydrator\BlogHydrator
+            App\DTO\User:    App\Hydrator\UserHydrator
 
 when@test:
     doctrine:

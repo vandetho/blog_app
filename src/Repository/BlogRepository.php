@@ -22,7 +22,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BlogRepository extends ServiceEntityRepository
 {
-
     /**
      * BlogRepository constructor.
      *
@@ -42,7 +41,15 @@ class BlogRepository extends ServiceEntityRepository
     public function findAsDTO(): array
     {
         return $this->createQueryBuilder('b')
-            ->select(['b.id', 'b.title', 'b.content', 'b.state'])
+            ->select([
+                'b.id',
+                'b.title',
+                'b.content',
+                'b.state',
+                'u.id as user_id',
+                'u.username as user_username',
+            ])
+            ->innerJoin('b.user', 'u')
             ->getQuery()
             ->getResult($this->dtoClass);
     }
@@ -56,7 +63,15 @@ class BlogRepository extends ServiceEntityRepository
     public function findByIdAsDTO(int $id): ?\App\DTO\Blog
     {
         return $this->createQueryBuilder('b')
-            ->select(['b.id', 'b.title', 'b.content', 'b.state'])
+            ->select([
+                'b.id',
+                'b.title',
+                'b.content',
+                'b.state',
+                'u.id as user_id',
+                'u.username as user_username',
+            ])
+            ->innerJoin('b.user', 'u')
             ->where('b.id = :id')
             ->setParameter('id', $id)
             ->getQuery()

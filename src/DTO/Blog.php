@@ -30,4 +30,9 @@ class Blog
      * @var string|null
      */
     public ?string $state = null;
+
+    /**
+     * @var User|null
+     */
+    public ?User $user = null;
 }
