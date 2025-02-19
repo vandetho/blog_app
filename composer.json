@@ -7,9 +7,10 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
-        "doctrine/orm": "^2.17",
+        "doctrine/orm": "^3.2",
         "phpdocumentor/reflection-docblock": "^5.3",
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
@@ -70,8 +71,9 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.2",
         "fakerphp/faker": "^1.23",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^11.2",
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",

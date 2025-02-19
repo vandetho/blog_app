@@ -38,7 +38,7 @@ class StateEntryListener extends AbstractEventListener
      *
      * @return void
      */
-    #[AsEnteredListener(workflow: 'blog', place: BlogState::NEED_REVIEW)]
+    #[AsEnterListener(workflow: 'blog', place: BlogState::NEED_REVIEW)]
     public function onEnterNeedReview(EnterEvent $event): void
     {
         $transition = $event->getTransition();
