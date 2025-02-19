@@ -14,7 +14,7 @@ use Symfony\Component\Workflow\Event\EnterEvent;
  */
 class StateEntryListener extends AbstractEventListener
 {
-    #[AsEnterListener]
+    #[AsEnterListener(workflow: 'blog')]
     public function onEnter(EnterEvent $event): void
     {
         $transition = $event->getTransition();

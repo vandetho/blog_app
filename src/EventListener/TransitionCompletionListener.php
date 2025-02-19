@@ -14,7 +14,7 @@ use Symfony\Component\Workflow\Event\CompletedEvent;
  */
 class TransitionCompletionListener extends AbstractEventListener
 {
-    #[AsCompletedListener]
+    #[AsCompletedListener(workflow: 'blog')]
     public function onCompleted(CompletedEvent $event): void
     {
         $transition = $event->getTransition();

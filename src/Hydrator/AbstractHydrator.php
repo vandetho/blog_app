@@ -69,7 +69,7 @@ class AbstractHydrator extends BaseAbstractHydrator
      * @return mixed
      * @throws JsonException
      */
-    protected function getValue(string $key, mixed $value, string $dtoClass = null): mixed
+    protected function getValue(string $key, mixed $value, ?string $dtoClass = null): mixed
     {
         $types = $this->propertyInfo->getTypes($dtoClass, $key);
         if (is_array($types) && count($types) > 0) {

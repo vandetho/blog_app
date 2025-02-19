@@ -14,7 +14,7 @@ use Symfony\Component\Workflow\Event\AnnounceEvent;
  */
 class TransitionAnnouncementListener extends AbstractEventListener
 {
-    #[AsAnnounceListener]
+    #[AsAnnounceListener(workflow: 'blog')]
     public function onAnnounce(AnnounceEvent $event): void
     {
         $transition = $event->getTransition();
