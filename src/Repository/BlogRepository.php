@@ -83,7 +83,7 @@ class BlogRepository extends ServiceEntityRepository
      */
     public function create(): Blog
     {
-        return new $this->_entityName;
+        return new Blog();
     }
 
     /**

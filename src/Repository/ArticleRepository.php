@@ -5,6 +5,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -68,7 +69,7 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function create(): Article
     {
-        return new $this->_entityName;
+        return new $this->entityClass;
     }
 
     /**
@@ -106,6 +107,7 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * @param Article $blog
+     * @throws ORMException
      */
     public function reload(Article $blog): void
     {
