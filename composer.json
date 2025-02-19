@@ -11,14 +11,14 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.17",
         "phpdocumentor/reflection-docblock": "^5.3",
-        "symfony/console": "7.0.*",
-        "symfony/dotenv": "7.0.*",
+        "symfony/console": "7.2.*",
+        "symfony/dotenv": "7.2.*",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "7.0.*",
-        "symfony/property-access": "7.0.*",
-        "symfony/runtime": "7.0.*",
-        "symfony/workflow": "7.0.*",
-        "symfony/yaml": "7.0.*"
+        "symfony/framework-bundle": "7.2.*",
+        "symfony/property-access": "7.2.*",
+        "symfony/runtime": "7.2.*",
+        "symfony/workflow": "7.2.*",
+        "symfony/yaml": "7.2.*"
     },
     "config": {
         "allow-plugins": {
@@ -66,16 +66,18 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.0.*"
+            "require": "7.2.*"
         }
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",
-        "symfony/browser-kit": "7.0.*",
-        "symfony/css-selector": "7.0.*",
+        "symfony/browser-kit": "7.2.*",
+        "symfony/css-selector": "7.2.*",
         "symfony/maker-bundle": "^1.52.0",
-        "symfony/phpunit-bridge": "^7.0"
+        "symfony/phpunit-bridge": "^7.2",
+        "symfony/stopwatch": "7.2.*",
+        "symfony/web-profiler-bundle": "7.2.*"
     }
 }
